@@ -1,0 +1,11 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "description": "For repos with real tests: merge minor/patch/digest updates once CI passes. Extend with github>adman234/renovate-config:automerge",
+  "packageRules": [
+    {
+      "matchUpdateTypes": ["minor", "patch", "digest"],
+      "matchPackageNames": ["*", "!torch", "!torchvision", "!torchaudio", "!nvidia/cuda", "!/^nvidia-/", "!com.android.tools.build:gradle", "!/^org\\.jetbrains\\.kotlin/", "!com.google.devtools.ksp"],
+      "automerge": true
+    }
+  ]
+}

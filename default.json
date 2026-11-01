@@ -1,0 +1,36 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "description": "Shared defaults for adman234's repos. Extend with github>adman234/renovate-config",
+  "extends": [
+    "config:recommended",
+    ":dependencyDashboard",
+    "customManagers:dockerfileVersions"
+  ],
+  "schedule": ["before 6am on monday"],
+  "prConcurrentLimit": 5,
+  "packageRules": [
+    {
+      "description": "GitHub Actions: one grouped PR, merged automatically once checks pass",
+      "matchManagers": ["github-actions"],
+      "groupName": "GitHub Actions",
+      "automerge": true
+    },
+    {
+      "description": "Keep the PyTorch/CUDA stack together and always review it by hand",
+      "matchPackageNames": ["torch", "torchvision", "torchaudio", "nvidia/cuda", "/^nvidia-/"],
+      "groupName": "PyTorch / CUDA stack",
+      "automerge": false
+    },
+    {
+      "description": "Android build tools break builds often; always review by hand",
+      "matchPackageNames": ["com.android.tools.build:gradle", "/^org\\.jetbrains\\.kotlin/", "com.google.devtools.ksp"],
+      "groupName": "Android build tools",
+      "automerge": false
+    },
+    {
+      "description": "Major updates wait for approval on the Dependency Dashboard",
+      "matchUpdateTypes": ["major"],
+      "dependencyDashboardApproval": true
+    }
+  ]
+}
